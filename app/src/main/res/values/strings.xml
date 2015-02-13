@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Tp_2015_02_android</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_in_dev_branch">Hello in the DEV branch!</string>
     <string name="action_settings">Settings</string>
 
 </resources>
