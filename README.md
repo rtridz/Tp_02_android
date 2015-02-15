@@ -24,4 +24,4 @@ https://github.com/Lexaloris
 Lexa-loris@mail.ru
 
 Подробное о проекте можно прочесть на сайте [Технопарка] [1]
-[1]: tp.mail.ru
+[1]: http://tech-mail.ru
