@@ -1,9 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+    tools:context=".AutoTranslateActivity">
 
-    <item android:id="@+id/action_auto_trans"
-        android:title="@string/action_auto_trans"
+    <item android:id="@+id/action_trans"
+        android:title="@string/action_trans"
         android:orderInCategory="100"
         android:showAsAction="never" />
 

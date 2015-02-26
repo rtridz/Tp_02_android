@@ -1,51 +1,37 @@
 package com.rtridz.tp_2015_02_android;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
-import com.rtridz.tp_2015_02_android.fragments.HeaderFragment;
-import com.rtridz.tp_2015_02_android.fragments.TextFragment;
-
-public class MainActivity extends Activity {
-    private static final String LOG_TAG = MainActivity.class.getName();
+public class AutoTranslateActivity extends Activity {
+    private static final String LOG_TAG = AutoTranslateActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // get an instance of FragmentTransaction from your Activity
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        //add a fragment
-        HeaderFragment headerFragment = new HeaderFragment();
-        fragmentTransaction.add(R.id.main_container, headerFragment);
-        TextFragment textFragment = new TextFragment();
-        fragmentTransaction.add(R.id.main_container, textFragment);
-        fragmentTransaction.commit();
+        setContentView(R.layout.activty_auto_translate);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_autotrans, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case (R.id.action_auto_trans) :
-                startActivity(new Intent(this, AutoTranslateActivity.class));
+            case (R.id.action_trans) :
+                startActivity(new Intent(this, MainActivity.class));
                 return true;
             case (R.id.action_history) :
                 startActivity(new Intent(this, HistoryActivity.class));

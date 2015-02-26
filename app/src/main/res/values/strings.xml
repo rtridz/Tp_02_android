@@ -2,8 +2,20 @@
 <resources>
 
     <string name="app_name">Tp_2015_02_android</string>
+
     <string name="hello_in_dev_branch">Hello in the DEV branch!</string>
-    <string name="action_settings">Settings</string>
     <string name="button_title">This is Title on 2 act</string>
+
+    <string name="title_activity_trans">Перевод текста</string>
+    <string name="title_activity_auto_trans">Авто перевод текста</string>
+    <string name="title_activity_history">История перевода</string>
+
+    <string name="action_auto_trans">Авто перевод</string>
+    <string name="action_history">История</string>
+    <string name="action_trans">Перевод</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_text">Введите текст...</string>
 
 </resources>
