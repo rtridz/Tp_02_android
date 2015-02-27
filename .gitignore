@@ -12,6 +12,7 @@
 bin/
 gen/
 
+
 # Gradle files
 .gradle/
 build/
@@ -26,3 +27,16 @@ proguard/
 *.log
 .idea
 *.iml
+.project
+*.classpath
+
+*.ucls
+build-number.txt
+/.apt_generated
+
+.gradle/
+.idea/
+
+/atlassian-ide-plugin.xml
+
+/settings.gradle
