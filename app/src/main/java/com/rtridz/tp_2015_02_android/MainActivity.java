@@ -27,9 +27,9 @@ public class MainActivity extends Activity {
 
         //add a fragment
         HeaderFragment headerFragment = new HeaderFragment();
-        fragmentTransaction.add(R.id.main_container, headerFragment);
+        fragmentTransaction.add(R.id.header_container, headerFragment);
         TextFragment textFragment = new TextFragment();
-        fragmentTransaction.add(R.id.main_container, textFragment);
+        fragmentTransaction.add(R.id.text_container, textFragment);
         fragmentTransaction.commit();
     }
 
