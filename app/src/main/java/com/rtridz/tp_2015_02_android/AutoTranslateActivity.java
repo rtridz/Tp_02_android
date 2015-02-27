@@ -1,14 +1,17 @@
 package com.rtridz.tp_2015_02_android;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
+import com.rtridz.tp_2015_02_android.fragments.HeaderFragment;
+import com.rtridz.tp_2015_02_android.fragments.TextFragment;
 
 public class AutoTranslateActivity extends Activity {
     private static final String LOG_TAG = AutoTranslateActivity.class.getName();
@@ -16,7 +19,18 @@ public class AutoTranslateActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activty_auto_translate);
+        setContentView(R.layout.activity_translate);
+
+        // get an instance of FragmentTransaction from your Activity
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        //add a fragment
+        HeaderFragment headerFragment = HeaderFragment.newInstance(true);
+        fragmentTransaction.add(R.id.header_container, headerFragment);
+        TextFragment textFragment = TextFragment.newInstance();
+        fragmentTransaction.add(R.id.text_container, textFragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -30,11 +44,11 @@ public class AutoTranslateActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case (R.id.action_trans) :
-                startActivity(new Intent(this, MainActivity.class));
+            case (R.id.action_trans):
+                startActivity(new Intent(this, TranslateActivity.class));
                 return true;
-            case (R.id.action_history) :
-                startActivity(new Intent(this, HistoryActivity.class));
+            case (R.id.action_main):
+                startActivity(new Intent(this, MainActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);

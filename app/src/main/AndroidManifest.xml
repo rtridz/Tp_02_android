@@ -9,7 +9,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_trans"
+            android:label="@string/title_activity_main"
             android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +22,8 @@
             android:label="@string/title_activity_auto_trans" >
         </activity>
         <activity
-            android:name=".HistoryActivity"
-            android:label="@string/title_activity_history" >
+            android:name=".TranslateActivity"
+            android:label="@string/title_activity_trans" >
         </activity>
     </application>
 

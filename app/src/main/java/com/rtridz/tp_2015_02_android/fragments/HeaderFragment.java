@@ -7,21 +7,19 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.rtridz.tp_2015_02_android.R;
 
 public class HeaderFragment extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String AUTO_TRANS = HeaderFragment.class.getName() + "_auto_trans";
 
-    private String mParam1;
-    private String mParam2;
+    private boolean isAutoTrans = false;
 
-    public static HeaderFragment newInstance(String param1, String param2) {
+    public static HeaderFragment newInstance(Boolean isAutoTrans) {
         HeaderFragment fragment = new HeaderFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(AUTO_TRANS, isAutoTrans.toString());
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,14 +32,18 @@ public class HeaderFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            isAutoTrans = Boolean.valueOf(getArguments().getString(AUTO_TRANS));
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_header, container, false);
+        View baseView = inflater.inflate(R.layout.fragment_header, container, false);
+        if (isAutoTrans) {
+            Button fromLang = (Button) baseView.findViewById(R.id.button_from_lang);
+            fromLang.setText("auto");
+        }
+        return baseView;
     }
 
     @Override

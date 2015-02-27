@@ -8,10 +8,10 @@
 
     <string name="title_activity_trans">Перевод текста</string>
     <string name="title_activity_auto_trans">Авто перевод текста</string>
-    <string name="title_activity_history">История перевода</string>
+    <string name="title_activity_main">Переводчик</string>
 
     <string name="action_auto_trans">Авто перевод</string>
-    <string name="action_history">История</string>
+    <string name="action_main">Главная</string>
     <string name="action_trans">Перевод</string>
 
 <!-- TODO: Remove or change this placeholder text -->

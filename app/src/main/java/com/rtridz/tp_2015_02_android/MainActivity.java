@@ -1,36 +1,38 @@
 package com.rtridz.tp_2015_02_android;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
-import com.rtridz.tp_2015_02_android.fragments.HeaderFragment;
-import com.rtridz.tp_2015_02_android.fragments.TextFragment;
-
-public class MainActivity extends Activity {
-    private static final String LOG_TAG = MainActivity.class.getName();
+public class MainActivity extends Activity implements View.OnClickListener {
+    private static final String LOG_TAG = TranslateActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button translate = (Button)findViewById(R.id.button_trans);
+        translate.setOnClickListener(this);
+        Button autoTranslate = (Button)findViewById(R.id.button_auto_trans);
+        autoTranslate.setOnClickListener(this);
+    }
 
-        // get an instance of FragmentTransaction from your Activity
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        //add a fragment
-        HeaderFragment headerFragment = new HeaderFragment();
-        fragmentTransaction.add(R.id.header_container, headerFragment);
-        TextFragment textFragment = new TextFragment();
-        fragmentTransaction.add(R.id.text_container, textFragment);
-        fragmentTransaction.commit();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_trans :
+                startActivity(new Intent(this, TranslateActivity.class));
+                break;
+            case R.id.button_auto_trans :
+                startActivity(new Intent(this, AutoTranslateActivity.class));
+                break;
+        }
     }
 
     @Override
@@ -47,8 +49,8 @@ public class MainActivity extends Activity {
             case (R.id.action_auto_trans) :
                 startActivity(new Intent(this, AutoTranslateActivity.class));
                 return true;
-            case (R.id.action_history) :
-                startActivity(new Intent(this, HistoryActivity.class));
+            case (R.id.action_trans) :
+                startActivity(new Intent(this, TranslateActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);

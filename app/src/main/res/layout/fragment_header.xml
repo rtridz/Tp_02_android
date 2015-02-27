@@ -4,28 +4,40 @@
     android:layout_height="match_parent"
     tools:context="com.rtridz.tp_2015_02_android.fragments.HeaderFragment">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Русский"
-            android:background="@color/background_material_light"
-            android:layout_gravity="left|top"
-            android:id="@+id/button_from_lang" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
+            android:layout_height="match_parent"
+            android:text="Ru"
+            android:textSize="40sp"
+            android:layout_weight="1"
             android:background="@color/background_material_light"
-            android:layout_gravity="center_horizontal|top"
+            android:id="@+id/button_from_lang" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Перевести"
+            android:src="@mipmap/ic_forward"
+            android:layout_weight="1"
+            android:background="@color/background_material_light"
             android:id="@+id/button_translate" />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
+            android:layout_height="match_parent"
+            android:text="En"
+            android:textSize="40sp"
+            android:layout_weight="1"
             android:background="@color/background_material_light"
-            android:layout_gravity="right|top"
             android:id="@+id/button_to_lang" />
+
+    </LinearLayout>
 
 </FrameLayout>
