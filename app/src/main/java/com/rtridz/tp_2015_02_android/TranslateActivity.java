@@ -21,11 +21,12 @@ public class TranslateActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translate);
 
-        // get an instance of FragmentTransaction from your Activity
+        // checking langs in sql lite
+        // get langs
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        //add a fragment
         HeaderFragment headerFragment = HeaderFragment.newInstance(false);
         fragmentTransaction.add(R.id.header_container, headerFragment);
         TextFragment textFragment = TextFragment.newInstance();
@@ -35,7 +36,6 @@ public class TranslateActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_trans, menu);
         return super.onCreateOptionsMenu(menu);

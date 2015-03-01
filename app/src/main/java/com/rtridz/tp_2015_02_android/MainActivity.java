@@ -10,6 +10,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.rtridz.tp_2015_02_android.Common.GetLangsTask;
+import com.rtridz.tp_2015_02_android.Common.LangsInfo;
+import com.rtridz.tp_2015_02_android.Common.YandexAPISender;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 public class MainActivity extends Activity implements View.OnClickListener {
     private static final String LOG_TAG = TranslateActivity.class.getName();
 
@@ -21,6 +29,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
         translate.setOnClickListener(this);
         Button autoTranslate = (Button)findViewById(R.id.button_auto_trans);
         autoTranslate.setOnClickListener(this);
+
+//        GetLangsTask task = new GetLangsTask();
+//        task.execute(getApplicationContext());
+//        try {
+//            Log.d(LOG_TAG, "Download langs: " + task.get()); // blocking for waiting task
+//        } catch (InterruptedException | ExecutionException e) {
+//            e.printStackTrace();
+//        }
+//        getApplicationContext();
     }
 
     @Override
@@ -37,7 +54,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);

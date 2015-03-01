@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rtridz.tp_2015_02_android" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -19,11 +21,13 @@
         </activity>
         <activity
             android:name=".AutoTranslateActivity"
-            android:label="@string/title_activity_auto_trans" >
+            android:label="@string/title_activity_auto_trans"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".TranslateActivity"
-            android:label="@string/title_activity_trans" >
+            android:label="@string/title_activity_trans"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
