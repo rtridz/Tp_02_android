@@ -21,6 +21,12 @@
         android:text="Return to main!"
         android:layout_gravity="center_horizontal" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_lesson2"
+        android:text="Lesson 2"
+        android:layout_gravity="center_horizontal" />
 
 
 </LinearLayout>

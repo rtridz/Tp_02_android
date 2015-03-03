@@ -30,6 +30,26 @@ public class ButtonActivity extends ActionBarActivity {
             }
         });
 
+
+
+
+
+
+        Button btn_lesson2 = (Button) findViewById(R.id.btn_lesson2);
+        btn_lesson2.setOnClickListener(new View.OnClickListener() {
+            @Override
+// отличие интента от бандла
+
+            public void onClick(View v) {
+                Intent intent_lesson2 = new Intent(ButtonActivity.this, lesson2.class);
+                setResult(Activity.RESULT_OK,intent_lesson2);
+//                finish();
+//                startActivity(intent_lesson2);
+                startActivityForResult(intent_lesson2, 5);
+
+
+            }
+        });
     }
 
 

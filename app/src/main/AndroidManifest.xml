@@ -21,6 +21,10 @@
             android:name=".ButtonActivity" >
 
         </activity>
+        <activity
+            android:name=".lesson2" >
+
+        </activity>
     </application>
 
 </manifest>
