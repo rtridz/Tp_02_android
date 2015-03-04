@@ -211,7 +211,7 @@ public class YandexAPISender {
         }
     }
 
-    public static String autoTranslate(String text, String toLang) {
+    public static AutoTranslateResult autoTranslate(String text, String toLang) {
         if (text.length() > 10_000) {
             return null;
         }
@@ -266,7 +266,8 @@ public class YandexAPISender {
             if (code != 200) {
                 return null;
             }
-            return jsonResp.getJSONArray("text").getString(0);
+            return new AutoTranslateResult(jsonResp.getString("lang").split("-")[0],
+                    jsonResp.getJSONArray("text").getString(0));
         } catch (JSONException | NullPointerException e) {
             e.printStackTrace();
             return null;

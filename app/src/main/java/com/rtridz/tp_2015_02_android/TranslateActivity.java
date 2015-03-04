@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.rtridz.tp_2015_02_android.Common.TranslateTask;
 import com.rtridz.tp_2015_02_android.Common.TranslateTaskParams;
+import com.rtridz.tp_2015_02_android.fragments.Header;
 import com.rtridz.tp_2015_02_android.fragments.HeaderFragment;
 import com.rtridz.tp_2015_02_android.fragments.TextFields;
 import com.rtridz.tp_2015_02_android.fragments.TextFragment;
@@ -23,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public class TranslateActivity extends Activity  implements View.OnClickListener, HeaderFragment.Listener, TextFragment.Listener {
+public class TranslateActivity extends Activity implements HeaderFragment.Listener, TextFragment.Listener {
     private static final String LOG_TAG = MainActivity.class.getName();
 
     @Override
@@ -42,11 +43,6 @@ public class TranslateActivity extends Activity  implements View.OnClickListener
         TextFragment textFragment = TextFragment.newInstance();
         fragmentTransaction.add(R.id.text_container, textFragment);
         fragmentTransaction.commit();
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 
     @Override
@@ -87,7 +83,7 @@ public class TranslateActivity extends Activity  implements View.OnClickListener
             TranslateTask task = new TranslateTask();
             task.execute(new TranslateTaskParams(fromLang, toLang, textFields.getEditText()));
             try {
-                String translatedText = task.get(5, TimeUnit.SECONDS); // blocking for waiting task
+                String translatedText = task.get(10, TimeUnit.SECONDS); // blocking for waiting task
                 textFields.setText(translatedText);
             } catch (InterruptedException | ExecutionException | CancellationException | TimeoutException e) {
                 e.printStackTrace();
@@ -99,7 +95,21 @@ public class TranslateActivity extends Activity  implements View.OnClickListener
 
     @Override
     public void onEnterTranslate(String text) {
-
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.header_container);
+        Fragment txtFragment = getFragmentManager().findFragmentById(R.id.text_container);
+        if (fragment instanceof Header && txtFragment instanceof TextFields) {
+            Header header = (Header)fragment;
+            TranslateTask task = new TranslateTask();
+            task.execute(new TranslateTaskParams(header.getFromLangAbbrev(), header.getToLangAbbrev(), text));
+            try {
+                String translatedText = task.get(10, TimeUnit.SECONDS); // blocking for waiting task
+                ((TextFields)txtFragment).setText(translatedText);
+            } catch (InterruptedException | ExecutionException | CancellationException | TimeoutException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e(LOG_TAG, "Text fragment not implement TextFields");
+        }
     }
 
     @Override

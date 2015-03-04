@@ -24,6 +24,7 @@
                 android:id="@+id/edit_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
                 android:hint="@string/enter_text"
                 android:textSize="30sp" >
                 <requestFocus />

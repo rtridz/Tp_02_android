@@ -1,6 +1,7 @@
 package com.rtridz.tp_2015_02_android;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -10,10 +11,21 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.rtridz.tp_2015_02_android.Common.AutoTranslateResult;
+import com.rtridz.tp_2015_02_android.Common.AutoTranslateTask;
+import com.rtridz.tp_2015_02_android.Common.TranslateTask;
+import com.rtridz.tp_2015_02_android.Common.TranslateTaskParams;
+import com.rtridz.tp_2015_02_android.fragments.Header;
 import com.rtridz.tp_2015_02_android.fragments.HeaderFragment;
+import com.rtridz.tp_2015_02_android.fragments.TextFields;
 import com.rtridz.tp_2015_02_android.fragments.TextFragment;
 
-public class AutoTranslateActivity extends Activity {
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+public class AutoTranslateActivity extends Activity implements HeaderFragment.Listener, TextFragment.Listener {
     private static final String LOG_TAG = AutoTranslateActivity.class.getName();
 
     @Override
@@ -52,6 +64,56 @@ public class AutoTranslateActivity extends Activity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClickFromLang() {
+        //NOF
+    }
+
+    @Override
+    public void onClickToLang() {
+        // show list of languages
+    }
+
+    @Override
+    public void onClickTranslate(String fromLang, String toLang) {
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.header_container);
+        Fragment txtFragment = getFragmentManager().findFragmentById(R.id.text_container);
+        if (fragment instanceof Header && txtFragment instanceof TextFields) {
+            TextFields textFields = (TextFields)txtFragment;
+            AutoTranslateTask task = new AutoTranslateTask();
+            task.execute(new TranslateTaskParams(null, toLang, textFields.getEditText()));
+            try {
+                AutoTranslateResult result = task.get(10, TimeUnit.SECONDS); // blocking for waiting task
+                textFields.setText(result.getTranslatedText());
+                ((Header)fragment).setFromLangAbbrev(result.getFromLangAbbrev());
+            } catch (InterruptedException | ExecutionException | CancellationException | TimeoutException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e(LOG_TAG, "Text fragment not implement TextFields");
+        }
+    }
+
+    @Override
+    public void onEnterTranslate(String text) {
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.header_container);
+        Fragment txtFragment = getFragmentManager().findFragmentById(R.id.text_container);
+        if (fragment instanceof Header && txtFragment instanceof TextFields) {
+            Header header = (Header)fragment;
+            AutoTranslateTask task = new AutoTranslateTask();
+            task.execute(new TranslateTaskParams(null, header.getToLangAbbrev(), text));
+            try {
+                AutoTranslateResult result = task.get(10, TimeUnit.SECONDS); // blocking for waiting task
+                ((TextFields)txtFragment).setText(result.getTranslatedText());
+                header.setFromLangAbbrev(result.getFromLangAbbrev());
+            } catch (InterruptedException | ExecutionException | CancellationException | TimeoutException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e(LOG_TAG, "Text fragment not implement TextFields");
+        }
     }
 
     @Override

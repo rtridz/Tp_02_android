@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.rtridz.tp_2015_02_android.R;
@@ -36,8 +39,21 @@ public class TextFragment extends Fragment implements TextFields {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_text, container, false);
+        View baseView = inflater.inflate(R.layout.fragment_text, container, false);
+        EditText editText = (EditText) baseView.findViewById(R.id.edit_text);
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
+                    activity.onEnterTranslate(v.getText().toString());
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        });
+        return baseView;
     }
 
     @Override

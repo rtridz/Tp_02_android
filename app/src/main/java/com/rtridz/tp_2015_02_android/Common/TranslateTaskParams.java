@@ -1,9 +1,7 @@
 package com.rtridz.tp_2015_02_android.Common;
 
-import android.content.Context;
-
 public class TranslateTaskParams {
-    private String fromLang;
+    private String fromLang; // may be null (which auto translate)
     private String toLang;
     private String text;
 

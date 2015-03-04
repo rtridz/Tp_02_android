@@ -88,9 +88,13 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
             case R.id.button_translate :
                 View view;
                 if ((view = getView()) != null){
-                    Button fromLang = (Button) view.findViewById(R.id.button_from_lang);
                     Button toLang = (Button) view.findViewById(R.id.button_to_lang);
-                    activity.onClickTranslate(fromLang.getText().toString(), toLang.getText().toString());
+                    if (isAutoTrans) {
+                        activity.onClickTranslate(null, toLang.getText().toString());
+                    } else {
+                        Button fromLang = (Button) view.findViewById(R.id.button_from_lang);
+                        activity.onClickTranslate(fromLang.getText().toString(), toLang.getText().toString());
+                    }
                 }
                 break;
         }
@@ -112,5 +116,25 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
             Button toLang = (Button) view.findViewById(R.id.button_to_lang);
             toLang.setText(abbrev);
         }
+    }
+
+    @Override
+    public String getFromLangAbbrev() {
+        View view;
+        if ((view = getView()) != null){
+            Button toLang = (Button) view.findViewById(R.id.button_from_lang);
+            return toLang.getText().toString();
+        }
+        return null;
+    }
+
+    @Override
+    public String getToLangAbbrev() {
+        View view;
+        if ((view = getView()) != null){
+            Button toLang = (Button) view.findViewById(R.id.button_to_lang);
+            return toLang.getText().toString();
+        }
+        return null;
     }
 }

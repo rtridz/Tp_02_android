@@ -4,4 +4,8 @@ public interface Header {
     void setFromLangAbbrev(String abbrev);
 
     void setToLangAbbrev(String abbrev);
+
+    String getFromLangAbbrev();
+
+    String getToLangAbbrev();
 }
