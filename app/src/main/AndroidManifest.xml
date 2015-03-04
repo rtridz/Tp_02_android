@@ -22,11 +22,13 @@
         <activity
             android:name=".AutoTranslateActivity"
             android:label="@string/title_activity_auto_trans"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".TranslateActivity"
             android:label="@string/title_activity_trans"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:screenOrientation="portrait" >
         </activity>
     </application>
