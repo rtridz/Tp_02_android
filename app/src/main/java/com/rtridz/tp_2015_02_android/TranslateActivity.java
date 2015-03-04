@@ -40,7 +40,7 @@ public class TranslateActivity extends Activity implements HeaderFragment.Listen
 
         HeaderFragment headerFragment = HeaderFragment.newInstance(false);
         fragmentTransaction.add(R.id.header_container, headerFragment);
-        TextFragment textFragment = TextFragment.newInstance();
+        TextFragment textFragment = TextFragment.newInstance(false);
         fragmentTransaction.add(R.id.text_container, textFragment);
         fragmentTransaction.commit();
     }
@@ -110,6 +110,12 @@ public class TranslateActivity extends Activity implements HeaderFragment.Listen
         } else {
             Log.e(LOG_TAG, "Text fragment not implement TextFields");
         }
+    }
+
+    @Override
+    public boolean onDelKeyEvent() {
+        // NOF
+        return false;
     }
 
     @Override

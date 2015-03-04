@@ -41,7 +41,7 @@ public class AutoTranslateActivity extends Activity implements HeaderFragment.Li
 
         HeaderFragment headerFragment = HeaderFragment.newInstance(true);
         fragmentTransaction.add(R.id.header_container, headerFragment);
-        TextFragment textFragment = TextFragment.newInstance();
+        TextFragment textFragment = TextFragment.newInstance(true);
         fragmentTransaction.add(R.id.text_container, textFragment);
         fragmentTransaction.commit();
     }
@@ -113,6 +113,18 @@ public class AutoTranslateActivity extends Activity implements HeaderFragment.Li
             }
         } else {
             Log.e(LOG_TAG, "Text fragment not implement TextFields");
+        }
+    }
+
+    @Override
+    public boolean onDelKeyEvent() {
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.header_container);
+        if (fragment instanceof Header) {
+            ((Header)fragment).setFromLangAbbrev("auto");
+            return true;
+        } else {
+            Log.e(LOG_TAG, "Text fragment not implement TextFields");
+            return false;
         }
     }
 

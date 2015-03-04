@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +16,21 @@ import android.widget.TextView;
 import com.rtridz.tp_2015_02_android.R;
 
 public class TextFragment extends Fragment implements TextFields {
+    private static final String AUTO_TRANS = HeaderFragment.class.getName() + "_auto_trans";
+    private boolean isAutoTrans = false;
+    private static final String LOG_TAG = TextFragment.class.getName();
     private Listener activity;
 
     public interface Listener {
         void onEnterTranslate(String text);
+
+        boolean onDelKeyEvent();
     }
 
-    public static TextFragment newInstance() {
+    public static TextFragment newInstance(Boolean isAutoTrans) {
         TextFragment fragment = new TextFragment();
         Bundle args = new Bundle();
+        args.putString(AUTO_TRANS, isAutoTrans.toString());
         fragment.setArguments(args);
         return fragment;
     }
@@ -35,24 +42,45 @@ public class TextFragment extends Fragment implements TextFields {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            isAutoTrans = Boolean.valueOf(getArguments().getString(AUTO_TRANS));
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View baseView = inflater.inflate(R.layout.fragment_text, container, false);
-        EditText editText = (EditText) baseView.findViewById(R.id.edit_text);
+        final EditText editText = (EditText) baseView.findViewById(R.id.edit_text);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))){
+                if ( (actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
+                        || (event.getAction() == KeyEvent.ACTION_DOWN))){
                     activity.onEnterTranslate(v.getText().toString());
                     return true;
                 }
-                else{
+                else {
                     return false;
                 }
             }
         });
+        if (isAutoTrans) {
+            final TextView textView = (TextView)baseView.findViewById(R.id.trans_text);
+            editText.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if ((keyCode == KeyEvent.KEYCODE_DEL) || (keyCode == KeyEvent.KEYCODE_BACK)) {
+                        if (activity.onDelKeyEvent()) {
+                            editText.setText("");
+                            textView.setText("");
+                        }
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            });
+        }
         return baseView;
     }
 
