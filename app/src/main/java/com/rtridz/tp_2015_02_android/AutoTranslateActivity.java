@@ -11,10 +11,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.rtridz.tp_2015_02_android.Common.AutoTranslateResult;
-import com.rtridz.tp_2015_02_android.Common.AutoTranslateTask;
-import com.rtridz.tp_2015_02_android.Common.TranslateTask;
-import com.rtridz.tp_2015_02_android.Common.TranslateTaskParams;
+import com.rtridz.tp_2015_02_android.common.asyncTasks.AutoTranslateResult;
+import com.rtridz.tp_2015_02_android.common.asyncTasks.AutoTranslateTask;
+import com.rtridz.tp_2015_02_android.common.asyncTasks.TranslateTaskParams;
 import com.rtridz.tp_2015_02_android.fragments.Header;
 import com.rtridz.tp_2015_02_android.fragments.HeaderFragment;
 import com.rtridz.tp_2015_02_android.fragments.TextFields;

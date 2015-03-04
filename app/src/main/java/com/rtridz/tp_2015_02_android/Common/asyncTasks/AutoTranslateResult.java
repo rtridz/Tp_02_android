@@ -1,4 +1,4 @@
-package com.rtridz.tp_2015_02_android.Common;
+package com.rtridz.tp_2015_02_android.common.asyncTasks;
 
 public class AutoTranslateResult {
     private String fromLangAbbrev;

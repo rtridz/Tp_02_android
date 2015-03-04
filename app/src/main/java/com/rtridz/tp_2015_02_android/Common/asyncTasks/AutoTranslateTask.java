@@ -1,6 +1,8 @@
-package com.rtridz.tp_2015_02_android.Common;
+package com.rtridz.tp_2015_02_android.common.asyncTasks;
 
 import android.os.AsyncTask;
+
+import com.rtridz.tp_2015_02_android.common.YandexAPISender;
 
 public class AutoTranslateTask extends AsyncTask<TranslateTaskParams, Void, AutoTranslateResult> {
 

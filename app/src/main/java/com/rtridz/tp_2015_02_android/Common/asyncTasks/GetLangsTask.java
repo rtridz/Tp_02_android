@@ -1,9 +1,15 @@
-package com.rtridz.tp_2015_02_android.Common;
+package com.rtridz.tp_2015_02_android.common.asyncTasks;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+
+import com.rtridz.tp_2015_02_android.common.DataBaseAPI;
+import com.rtridz.tp_2015_02_android.common.DataBaseSchemas;
+import com.rtridz.tp_2015_02_android.common.LangsInfo;
+import com.rtridz.tp_2015_02_android.common.YandexAPISender;
+
 import java.util.Map.Entry;
 
 public class GetLangsTask extends AsyncTask<Context, Void, Boolean> {

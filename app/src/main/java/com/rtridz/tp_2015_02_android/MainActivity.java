@@ -10,14 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.rtridz.tp_2015_02_android.Common.GetLangsTask;
-import com.rtridz.tp_2015_02_android.Common.LangsInfo;
-import com.rtridz.tp_2015_02_android.Common.YandexAPISender;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
 public class MainActivity extends Activity implements View.OnClickListener {
     private static final String LOG_TAG = TranslateActivity.class.getName();
 

@@ -1,4 +1,6 @@
-package com.rtridz.tp_2015_02_android.Common;
+package com.rtridz.tp_2015_02_android.common;
+
+import com.rtridz.tp_2015_02_android.common.asyncTasks.AutoTranslateResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,12 +13,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.KeyStore;
 import java.util.Iterator;
 
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
 
 public class YandexAPISender {
     private static final String API_KEY =

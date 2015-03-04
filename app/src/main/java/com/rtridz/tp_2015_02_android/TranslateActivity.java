@@ -10,10 +10,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.rtridz.tp_2015_02_android.Common.TranslateTask;
-import com.rtridz.tp_2015_02_android.Common.TranslateTaskParams;
+import com.rtridz.tp_2015_02_android.common.asyncTasks.TranslateTask;
+import com.rtridz.tp_2015_02_android.common.asyncTasks.TranslateTaskParams;
 import com.rtridz.tp_2015_02_android.fragments.Header;
 import com.rtridz.tp_2015_02_android.fragments.HeaderFragment;
 import com.rtridz.tp_2015_02_android.fragments.TextFields;

@@ -16,6 +16,9 @@ import com.rtridz.tp_2015_02_android.R;
 
 import com.rtridz.tp_2015_02_android.fragments.dummy.DummyContent;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -26,15 +29,10 @@ import com.rtridz.tp_2015_02_android.fragments.dummy.DummyContent;
  * interface.
  */
 public class ListFragment extends Fragment implements AbsListView.OnItemClickListener {
+    private static final String ABBREV = "ABBREV";
+    private static final String LANG = "LANG";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private HashMap<String, String> langs;
 
     private OnFragmentInteractionListener mListener;
 
@@ -49,40 +47,36 @@ public class ListFragment extends Fragment implements AbsListView.OnItemClickLis
      */
     private ListAdapter mAdapter;
 
-    // TODO: Rename and change types of parameters
-    public static ListFragment newInstance(String param1, String param2) {
+    public static ListFragment newInstance(ArrayList<String> abbrevs, ArrayList<String> langs) {
         ListFragment fragment = new ListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putStringArrayList(ABBREV, abbrevs);
+        args.putStringArrayList(LANG, langs);
         fragment.setArguments(args);
         return fragment;
     }
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public ListFragment() {
-    }
+    public ListFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            int i = 0;
+            for (String abbrev : getArguments().getStringArrayList(ABBREV)) {
+                langs.put(abbrev, getArguments().getStringArrayList(LANG).get(i++));
+            }
         }
-
-        // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+        mAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         View view = inflater.inflate(R.layout.fragment_item, container, false);
 
         // Set the adapter
