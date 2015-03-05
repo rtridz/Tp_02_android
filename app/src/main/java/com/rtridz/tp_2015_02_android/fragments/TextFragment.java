@@ -18,7 +18,6 @@ import com.rtridz.tp_2015_02_android.R;
 public class TextFragment extends Fragment implements TextFields {
     private static final String AUTO_TRANS = HeaderFragment.class.getName() + "_auto_trans";
     private boolean isAutoTrans = false;
-    private static final String LOG_TAG = TextFragment.class.getName();
     private Listener activity;
 
     public interface Listener {

@@ -3,13 +3,10 @@ package com.rtridz.tp_2015_02_android.common;
 import android.provider.BaseColumns;
 
 public final class DataBaseSchemas {
-
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Translater.db";
 
-    // To prevent someone from accidentally instantiating the contract class,
-    // give it an empty constructor.
     public DataBaseSchemas() {}
 
     public static final String SQL_CREATE_TABLE_LANGS =

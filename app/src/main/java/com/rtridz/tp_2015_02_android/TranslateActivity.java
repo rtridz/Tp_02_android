@@ -78,15 +78,15 @@ public class TranslateActivity extends Activity implements HeaderFragment.Listen
     public void onClickTranslate(String fromLang, String toLang) {
         Fragment fragment = getFragmentManager().findFragmentById(R.id.text_container);
         if (fragment instanceof TextFields) {
-            TextFields textFields = (TextFields)fragment;
-            TranslateTask task = new TranslateTask();
+            final TextFields textFields = (TextFields)fragment;
+            TranslateTask task = new TranslateTask() {
+                @Override
+                protected void onPostExecute(String translatedText) {
+                    super.onPostExecute(translatedText);
+                    textFields.setText(translatedText);
+                }
+            };
             task.execute(new TranslateTaskParams(fromLang, toLang, textFields.getEditText()));
-            try {
-                String translatedText = task.get(10, TimeUnit.SECONDS); // blocking for waiting task
-                textFields.setText(translatedText);
-            } catch (InterruptedException | ExecutionException | CancellationException | TimeoutException e) {
-                e.printStackTrace();
-            }
         } else {
             Log.e(LOG_TAG, "Text fragment not implement TextFields");
         }
@@ -95,17 +95,17 @@ public class TranslateActivity extends Activity implements HeaderFragment.Listen
     @Override
     public void onEnterTranslate(String text) {
         Fragment fragment = getFragmentManager().findFragmentById(R.id.header_container);
-        Fragment txtFragment = getFragmentManager().findFragmentById(R.id.text_container);
+        final Fragment txtFragment = getFragmentManager().findFragmentById(R.id.text_container);
         if (fragment instanceof Header && txtFragment instanceof TextFields) {
             Header header = (Header)fragment;
-            TranslateTask task = new TranslateTask();
+            TranslateTask task = new TranslateTask() {
+                @Override
+                protected void onPostExecute(String translatedText) {
+                    super.onPostExecute(translatedText);
+                    ((TextFields)txtFragment).setText(translatedText);
+                }
+            };
             task.execute(new TranslateTaskParams(header.getFromLangAbbrev(), header.getToLangAbbrev(), text));
-            try {
-                String translatedText = task.get(10, TimeUnit.SECONDS); // blocking for waiting task
-                ((TextFields)txtFragment).setText(translatedText);
-            } catch (InterruptedException | ExecutionException | CancellationException | TimeoutException e) {
-                e.printStackTrace();
-            }
         } else {
             Log.e(LOG_TAG, "Text fragment not implement TextFields");
         }

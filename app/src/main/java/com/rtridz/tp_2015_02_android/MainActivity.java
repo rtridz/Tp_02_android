@@ -21,15 +21,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         translate.setOnClickListener(this);
         Button autoTranslate = (Button)findViewById(R.id.button_auto_trans);
         autoTranslate.setOnClickListener(this);
-
-//        GetLangsTask task = new GetLangsTask();
-//        task.execute(getApplicationContext());
-//        try {
-//            Log.d(LOG_TAG, "Download langs: " + task.get()); // blocking for waiting task
-//        } catch (InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-//        getApplicationContext();
     }
 
     @Override

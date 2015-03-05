@@ -22,20 +22,18 @@ public class YandexAPISender {
             "trnsl.1.1.20150224T085428Z.f41db3502553b605.a80b80e903ffbed3ec67ebe456f19f83d6fa0b3b";
     private static final String YA_TR_URL = "https://translate.yandex.net/api/v1.5/tr.json/";
 
-    public static LangsInfo getLangsInfo()  {
-        LangsInfo langsInfo = new LangsInfo();
-        StringBuilder url = new StringBuilder(YA_TR_URL);
-        url.append("getLangs?key=" + API_KEY + "&ui=ru");
+    private static StringBuilder sendRequest(StringBuilder url) {
         URL getReq;
         try {
             getReq = new URL(url.toString());
         } catch (MalformedURLException e) {
             return null;
         }
-        
+
         HttpURLConnection con;
         try {
             con = (HttpURLConnection)getReq.openConnection();
+            con.connect();
         } catch (IOException e) {
             return null;
         }
@@ -65,8 +63,16 @@ public class YandexAPISender {
                     is.close();
                 } catch (IOException ignore) {}
             }
+            con.disconnect();
         }
-        System.out.println("response: " + response);
+        return response;
+    }
+
+    public static LangsInfo getLangsInfo()  {
+        LangsInfo langsInfo = new LangsInfo();
+        StringBuilder url = new StringBuilder(YA_TR_URL);
+        url.append("getLangs?key=" + API_KEY + "&ui=ru");
+        StringBuilder response = sendRequest(url);
         JSONObject jsonResp;
         try {
             jsonResp = new JSONObject(response.toString());
@@ -94,46 +100,7 @@ public class YandexAPISender {
         StringBuilder url = new StringBuilder(YA_TR_URL);
         url.append("detect?key=" + API_KEY + "&text=");
         url.append(text);
-        URL getReq;
-        try {
-            getReq = new URL(url.toString());
-        } catch (MalformedURLException e) {
-            return null;
-        }
-
-        HttpsURLConnection con;
-        try {
-            con = (HttpsURLConnection)getReq.openConnection();
-        } catch (IOException e) {
-            return null;
-        }
-        StringBuilder response = new StringBuilder();
-        InputStream is = null;
-        BufferedReader reader = null;
-        try {
-            is = con.getInputStream();
-            if (con.getResponseCode() != 200) {
-                return null;
-            }
-            reader = new BufferedReader(new InputStreamReader(is));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
-            }
-        } catch (IOException e) {
-            return null;
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException ignore) {}
-            }
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException ignore) {}
-            }
-        }
+        StringBuilder response = sendRequest(url);
         JSONObject jsonResp;
         try {
             jsonResp = new JSONObject(response.toString());
@@ -156,46 +123,7 @@ public class YandexAPISender {
         url.append("translate?key=" + API_KEY + "&text=");
         url.append(text);
         url.append("&lang=" + fromLang + "-" + toLang + "&format=plain");
-        URL getReq;
-        try {
-            getReq = new URL(url.toString());
-        } catch (MalformedURLException e) {
-            return null;
-        }
-
-        HttpsURLConnection con;
-        try {
-            con = (HttpsURLConnection)getReq.openConnection();
-        } catch (IOException e) {
-            return null;
-        }
-        StringBuilder response = new StringBuilder();
-        InputStream is = null;
-        BufferedReader reader = null;
-        try {
-            is = con.getInputStream();
-            if (con.getResponseCode() != 200) {
-                return null;
-            }
-            reader = new BufferedReader(new InputStreamReader(is));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
-            }
-        } catch (IOException e) {
-            return null;
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException ignore) {}
-            }
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException ignore) {}
-            }
-        }
+        StringBuilder response = sendRequest(url);
         JSONObject jsonResp;
         try {
             jsonResp = new JSONObject(response.toString());
@@ -218,46 +146,7 @@ public class YandexAPISender {
         url.append("translate?key=" + API_KEY + "&text=");
         url.append(text);
         url.append("&lang=" + toLang + "&format=plain");
-        URL getReq;
-        try {
-            getReq = new URL(url.toString());
-        } catch (MalformedURLException e) {
-            return null;
-        }
-
-        HttpsURLConnection con;
-        try {
-            con = (HttpsURLConnection)getReq.openConnection();
-        } catch (IOException e) {
-            return null;
-        }
-        StringBuilder response = new StringBuilder();
-        InputStream is = null;
-        BufferedReader reader = null;
-        try {
-            is = con.getInputStream();
-            if (con.getResponseCode() != 200) {
-                return null;
-            }
-            reader = new BufferedReader(new InputStreamReader(is));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
-            }
-        } catch (IOException e) {
-            return null;
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException ignore) {}
-            }
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException ignore) {}
-            }
-        }
+        StringBuilder response = sendRequest(url);
         JSONObject jsonResp;
         try {
             jsonResp = new JSONObject(response.toString());

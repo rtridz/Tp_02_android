@@ -77,19 +77,18 @@ public class AutoTranslateActivity extends Activity implements HeaderFragment.Li
 
     @Override
     public void onClickTranslate(String fromLang, String toLang) {
-        Fragment fragment = getFragmentManager().findFragmentById(R.id.header_container);
+        final Fragment fragment = getFragmentManager().findFragmentById(R.id.header_container);
         Fragment txtFragment = getFragmentManager().findFragmentById(R.id.text_container);
         if (fragment instanceof Header && txtFragment instanceof TextFields) {
-            TextFields textFields = (TextFields)txtFragment;
-            AutoTranslateTask task = new AutoTranslateTask();
+            final TextFields textFields = (TextFields)txtFragment;
+            AutoTranslateTask task = new AutoTranslateTask() {
+                @Override
+                protected void onPostExecute(AutoTranslateResult result) {
+                    textFields.setText(result.getTranslatedText());
+                    ((Header)fragment).setFromLangAbbrev(result.getFromLangAbbrev());
+                }
+            };
             task.execute(new TranslateTaskParams(null, toLang, textFields.getEditText()));
-            try {
-                AutoTranslateResult result = task.get(10, TimeUnit.SECONDS); // blocking for waiting task
-                textFields.setText(result.getTranslatedText());
-                ((Header)fragment).setFromLangAbbrev(result.getFromLangAbbrev());
-            } catch (InterruptedException | ExecutionException | CancellationException | TimeoutException e) {
-                e.printStackTrace();
-            }
         } else {
             Log.e(LOG_TAG, "Text fragment not implement TextFields");
         }
@@ -98,18 +97,17 @@ public class AutoTranslateActivity extends Activity implements HeaderFragment.Li
     @Override
     public void onEnterTranslate(String text) {
         Fragment fragment = getFragmentManager().findFragmentById(R.id.header_container);
-        Fragment txtFragment = getFragmentManager().findFragmentById(R.id.text_container);
+        final Fragment txtFragment = getFragmentManager().findFragmentById(R.id.text_container);
         if (fragment instanceof Header && txtFragment instanceof TextFields) {
-            Header header = (Header)fragment;
-            AutoTranslateTask task = new AutoTranslateTask();
+            final Header header = (Header)fragment;
+            AutoTranslateTask task = new AutoTranslateTask() {
+                @Override
+                protected void onPostExecute(AutoTranslateResult result) {
+                    ((TextFields)txtFragment).setText(result.getTranslatedText());
+                    header.setFromLangAbbrev(result.getFromLangAbbrev());
+                }
+            };
             task.execute(new TranslateTaskParams(null, header.getToLangAbbrev(), text));
-            try {
-                AutoTranslateResult result = task.get(10, TimeUnit.SECONDS); // blocking for waiting task
-                ((TextFields)txtFragment).setText(result.getTranslatedText());
-                header.setFromLangAbbrev(result.getFromLangAbbrev());
-            } catch (InterruptedException | ExecutionException | CancellationException | TimeoutException e) {
-                e.printStackTrace();
-            }
         } else {
             Log.e(LOG_TAG, "Text fragment not implement TextFields");
         }
