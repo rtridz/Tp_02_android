@@ -38,7 +38,7 @@ public class AutoTranslateActivity extends Activity implements HeaderFragment.Li
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        HeaderFragment headerFragment = HeaderFragment.newInstance(true);
+        HeaderFragment headerFragment = HeaderFragment.newInstance(this, true);
         fragmentTransaction.add(R.id.header_container, headerFragment);
         TextFragment textFragment = TextFragment.newInstance(true);
         fragmentTransaction.add(R.id.text_container, textFragment);

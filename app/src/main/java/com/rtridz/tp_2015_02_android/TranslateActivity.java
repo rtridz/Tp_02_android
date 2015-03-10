@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.rtridz.tp_2015_02_android.common.asyncTasks.TranslateTask;
 import com.rtridz.tp_2015_02_android.common.asyncTasks.TranslateTaskParams;
@@ -34,10 +36,11 @@ public class TranslateActivity extends Activity implements HeaderFragment.Listen
         // checking langs in sql lite
         // get langs
 
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        HeaderFragment headerFragment = HeaderFragment.newInstance(false);
+        HeaderFragment headerFragment = HeaderFragment.newInstance(this, false);
         fragmentTransaction.add(R.id.header_container, headerFragment);
         TextFragment textFragment = TextFragment.newInstance(false);
         fragmentTransaction.add(R.id.text_container, textFragment);

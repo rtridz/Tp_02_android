@@ -1,13 +1,17 @@
 package com.rtridz.tp_2015_02_android.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import com.rtridz.tp_2015_02_android.R;
 
@@ -15,6 +19,7 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
     private static final String AUTO_TRANS = HeaderFragment.class.getName() + "_auto_trans";
     private boolean isAutoTrans = false;
     private Listener activity;
+    static Context ctx;
 
     public interface Listener {
         void onClickFromLang();
@@ -24,7 +29,8 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
         void onClickTranslate(String fromLang, String toLang);
     }
 
-    public static HeaderFragment newInstance(Boolean isAutoTrans) {
+    public static HeaderFragment newInstance(Context context, Boolean isAutoTrans) {
+        ctx = context;
         HeaderFragment fragment = new HeaderFragment();
         Bundle args = new Bundle();
         args.putString(AUTO_TRANS, isAutoTrans.toString());
@@ -42,21 +48,30 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
         if (getArguments() != null) {
             isAutoTrans = Boolean.valueOf(getArguments().getString(AUTO_TRANS));
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View baseView = inflater.inflate(R.layout.fragment_header, container, false);
-        Button fromLang = (Button) baseView.findViewById(R.id.button_from_lang);
-        if (isAutoTrans) {
-            fromLang.setText("auto");
-        } else {
-            fromLang.setOnClickListener(this);
-        }
-        Button toLang = (Button) baseView.findViewById(R.id.button_to_lang);
-        toLang.setOnClickListener(this);
+
         ImageButton translate = (ImageButton) baseView.findViewById(R.id.button_translate);
         translate.setOnClickListener(this);
+
+        String[] data = {"en", "ru", "fr"};
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(ctx, android.R.layout.simple_spinner_item, data);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner1 = (Spinner) baseView.findViewById(R.id.spinner1);
+        spinner1.setAdapter(adapter1);
+        spinner1.setSelection(2);
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(ctx, android.R.layout.simple_spinner_item, data);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner2 = (Spinner) baseView.findViewById(R.id.spinner2);
+        spinner2.setAdapter(adapter2);
+        spinner2.setSelection(2);
+
         return baseView;
     }
 
@@ -78,22 +93,16 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
 
     @Override
     public void onClick(View v) {
+        View view;
         switch (v.getId()) {
-            case R.id.button_from_lang :
-                activity.onClickFromLang();
-                break;
-            case R.id.button_to_lang :
-                activity.onClickToLang();
-                break;
             case R.id.button_translate :
-                View view;
                 if ((view = getView()) != null){
-                    Button toLang = (Button) view.findViewById(R.id.button_to_lang);
+                    Spinner spinner2 = (Spinner) view.findViewById(R.id.spinner2);
                     if (isAutoTrans) {
-                        activity.onClickTranslate(null, toLang.getText().toString());
+                        activity.onClickTranslate(null, spinner2.getSelectedItem().toString());
                     } else {
-                        Button fromLang = (Button) view.findViewById(R.id.button_from_lang);
-                        activity.onClickTranslate(fromLang.getText().toString(), toLang.getText().toString());
+                        Spinner spinner1 = (Spinner) view.findViewById(R.id.spinner1);
+                        activity.onClickTranslate(spinner1.getSelectedItem().toString(), spinner2.getSelectedItem().toString());
                     }
                 }
                 break;
@@ -104,8 +113,10 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
     public void setFromLangAbbrev(String abbrev) {
         View view;
         if ((view = getView()) != null){
+/*
             Button fromLang = (Button) view.findViewById(R.id.button_from_lang);
             fromLang.setText(abbrev);
+*/
         }
     }
 
@@ -113,8 +124,10 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
     public void setToLangAbbrev(String abbrev) {
         View view;
         if ((view = getView()) != null){
+/*
             Button toLang = (Button) view.findViewById(R.id.button_to_lang);
             toLang.setText(abbrev);
+*/
         }
     }
 
@@ -122,8 +135,10 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
     public String getFromLangAbbrev() {
         View view;
         if ((view = getView()) != null){
+/*
             Button toLang = (Button) view.findViewById(R.id.button_from_lang);
             return toLang.getText().toString();
+*/
         }
         return null;
     }
@@ -132,8 +147,10 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
     public String getToLangAbbrev() {
         View view;
         if ((view = getView()) != null){
+/*
             Button toLang = (Button) view.findViewById(R.id.button_to_lang);
             return toLang.getText().toString();
+*/
         }
         return null;
     }

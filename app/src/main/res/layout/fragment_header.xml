@@ -11,32 +11,48 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
-        <Button
+        <!--<Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="en"
             android:textSize="40sp"
             android:layout_weight="1"
             android:background="@color/background_material_light"
-            android:id="@+id/button_from_lang" />
+            android:id="@+id/button_from_lang" />-->
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/spinner1"
+            android:background="@color/background_material_light"
+            android:layout_marginRight="5dip"
+            android:layout_weight="3" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Перевести"
             android:src="@mipmap/ic_forward"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:background="@color/background_material_light"
             android:id="@+id/button_translate" />
 
-        <Button
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/spinner2"
+            android:background="@color/background_material_light"
+            android:layout_marginLeft="5dip"
+            android:layout_weight="3" />
+
+        <!--<Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="ru"
             android:textSize="40sp"
             android:layout_weight="1"
             android:background="@color/background_material_light"
-            android:id="@+id/button_to_lang" />
+            android:id="@+id/button_to_lang" />-->
 
     </LinearLayout>
 
