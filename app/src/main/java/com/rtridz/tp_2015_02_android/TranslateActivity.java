@@ -75,11 +75,12 @@ public class TranslateActivity extends Activity implements HeaderFragment.Listen
         Fragment fragment = getFragmentManager().findFragmentById(R.id.text_container);
         if (fragment instanceof TextFields) {
             final TextFields textFields = (TextFields)fragment;
+            textFields.setText("", true);
             TranslateTask task = new TranslateTask() {
                 @Override
                 protected void onPostExecute(String translatedText) {
                     super.onPostExecute(translatedText);
-                    textFields.setText(translatedText);
+                    textFields.setText(translatedText, false);
                 }
             };
             task.execute(new TranslateTaskParams(fromLang, toLang, textFields.getEditText()));
@@ -94,11 +95,12 @@ public class TranslateActivity extends Activity implements HeaderFragment.Listen
         final Fragment txtFragment = getFragmentManager().findFragmentById(R.id.text_container);
         if (fragment instanceof Header && txtFragment instanceof TextFields) {
             Header header = (Header)fragment;
+            ((TextFields)txtFragment).setText("", true);
             TranslateTask task = new TranslateTask() {
                 @Override
                 protected void onPostExecute(String translatedText) {
                     super.onPostExecute(translatedText);
-                    ((TextFields)txtFragment).setText(translatedText);
+                    ((TextFields)txtFragment).setText(translatedText, false);
                 }
             };
             task.execute(new TranslateTaskParams(header.getFromLangAbbrev(), header.getToLangAbbrev(), text));

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.rtridz.tp_2015_02_android.R;
@@ -78,6 +79,8 @@ public class TextFragment extends Fragment implements TextFields {
                 }
             });
         }
+        ProgressBar progressBar = (ProgressBar) baseView.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
         return baseView;
     }
 
@@ -108,10 +111,16 @@ public class TextFragment extends Fragment implements TextFields {
     }
 
     @Override
-    public void setText(String text) {
+    public void setText(String text, boolean isVisibleBar) {
         View view;
         if ((view = getView()) != null){
             TextView textView = (TextView) view.findViewById(R.id.trans_text);
+            ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+            if (isVisibleBar) {
+                progressBar.setVisibility(View.VISIBLE);
+            } else {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
             textView.setText(text);
         }
     }

@@ -81,10 +81,11 @@ public class AutoTranslateActivity extends Activity implements HeaderFragment.Li
         Fragment txtFragment = getFragmentManager().findFragmentById(R.id.text_container);
         if (fragment instanceof Header && txtFragment instanceof TextFields) {
             final TextFields textFields = (TextFields)txtFragment;
+            textFields.setText("", true);
             AutoTranslateTask task = new AutoTranslateTask() {
                 @Override
                 protected void onPostExecute(AutoTranslateResult result) {
-                    textFields.setText(result.getTranslatedText());
+                    textFields.setText(result.getTranslatedText(), false);
                     ((Header)fragment).setFromLangAbbrev(result.getFromLangAbbrev());
                 }
             };
@@ -100,10 +101,11 @@ public class AutoTranslateActivity extends Activity implements HeaderFragment.Li
         final Fragment txtFragment = getFragmentManager().findFragmentById(R.id.text_container);
         if (fragment instanceof Header && txtFragment instanceof TextFields) {
             final Header header = (Header)fragment;
+            ((TextFields)txtFragment).setText("", true);
             AutoTranslateTask task = new AutoTranslateTask() {
                 @Override
                 protected void onPostExecute(AutoTranslateResult result) {
-                    ((TextFields)txtFragment).setText(result.getTranslatedText());
+                    ((TextFields)txtFragment).setText(result.getTranslatedText(), false);
                     header.setFromLangAbbrev(result.getFromLangAbbrev());
                 }
             };
