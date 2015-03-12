@@ -2,12 +2,15 @@ package com.rtridz.tp_2015_02_android.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -58,19 +61,27 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
         ImageButton translate = (ImageButton) baseView.findViewById(R.id.button_translate);
         translate.setOnClickListener(this);
 
-        String[] data = {"en", "ru", "fr"};
+        String[] langList;
+        String[] dataAuto;
+        String[] langFrom;
 
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(ctx, android.R.layout.simple_spinner_item, data);
+        langList = getResources().getStringArray(R.array.langList);
+        dataAuto = getResources().getStringArray(R.array.langAuto);
+
+        if (isAutoTrans) { langFrom = dataAuto; } else langFrom = langList;
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(ctx, android.R.layout.simple_spinner_item, langFrom);
+
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner1 = (Spinner) baseView.findViewById(R.id.spinner1);
+        Spinner spinner1 = (Spinner) baseView.findViewById(R.id.spinnerFromLang);
         spinner1.setAdapter(adapter1);
-        spinner1.setSelection(2);
+        spinner1.setSelection(0);
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(ctx, android.R.layout.simple_spinner_item, data);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(ctx, android.R.layout.simple_spinner_item, langList);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner2 = (Spinner) baseView.findViewById(R.id.spinner2);
+        Spinner spinner2 = (Spinner) baseView.findViewById(R.id.spinnerToLang);
         spinner2.setAdapter(adapter2);
-        spinner2.setSelection(2);
+        spinner2.setSelection(1);
 
         return baseView;
     }
@@ -96,12 +107,14 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
         View view;
         switch (v.getId()) {
             case R.id.button_translate :
+                final Animation animAlpha = AnimationUtils.loadAnimation(ctx, R.anim.anim_alpha);
+                v.startAnimation(animAlpha);
                 if ((view = getView()) != null){
-                    Spinner spinner2 = (Spinner) view.findViewById(R.id.spinner2);
+                    Spinner spinner2 = (Spinner) view.findViewById(R.id.spinnerToLang);
                     if (isAutoTrans) {
                         activity.onClickTranslate(null, spinner2.getSelectedItem().toString());
                     } else {
-                        Spinner spinner1 = (Spinner) view.findViewById(R.id.spinner1);
+                        Spinner spinner1 = (Spinner) view.findViewById(R.id.spinnerFromLang);
                         activity.onClickTranslate(spinner1.getSelectedItem().toString(), spinner2.getSelectedItem().toString());
                     }
                 }
@@ -135,10 +148,8 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
     public String getFromLangAbbrev() {
         View view;
         if ((view = getView()) != null){
-/*
-            Button toLang = (Button) view.findViewById(R.id.button_from_lang);
-            return toLang.getText().toString();
-*/
+            Spinner spinner = (Spinner) view.findViewById(R.id.spinnerFromLang);
+            return spinner.getSelectedItem().toString();
         }
         return null;
     }
@@ -147,10 +158,8 @@ public class HeaderFragment extends Fragment implements View.OnClickListener, He
     public String getToLangAbbrev() {
         View view;
         if ((view = getView()) != null){
-/*
-            Button toLang = (Button) view.findViewById(R.id.button_to_lang);
-            return toLang.getText().toString();
-*/
+            Spinner spinner = (Spinner) view.findViewById(R.id.spinnerToLang);
+            return spinner.getSelectedItem().toString();
         }
         return null;
     }

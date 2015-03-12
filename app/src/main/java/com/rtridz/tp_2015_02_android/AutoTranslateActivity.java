@@ -114,6 +114,7 @@ public class AutoTranslateActivity extends Activity implements HeaderFragment.Li
     }
 
     @Override
+    @Deprecated
     public boolean onDelKeyEvent() {
         Fragment fragment = getFragmentManager().findFragmentById(R.id.header_container);
         if (fragment instanceof Header) {

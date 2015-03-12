@@ -10,8 +10,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.rtridz.tp_2015_02_android.common.asyncTasks.TranslateTask;
 import com.rtridz.tp_2015_02_android.common.asyncTasks.TranslateTaskParams;
@@ -19,11 +17,6 @@ import com.rtridz.tp_2015_02_android.fragments.Header;
 import com.rtridz.tp_2015_02_android.fragments.HeaderFragment;
 import com.rtridz.tp_2015_02_android.fragments.TextFields;
 import com.rtridz.tp_2015_02_android.fragments.TextFragment;
-
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class TranslateActivity extends Activity implements HeaderFragment.Listener, TextFragment.Listener {
     private static final String LOG_TAG = MainActivity.class.getName();

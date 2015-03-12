@@ -27,7 +27,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_trans :
-                Log.d("Lexalogs", "button_trans click");
                 startActivity(new Intent(this, TranslateActivity.class));
                 break;
             case R.id.button_auto_trans :

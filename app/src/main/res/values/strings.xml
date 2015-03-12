@@ -18,4 +18,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_text">Введите текст...</string>
 
+    <string-array name="langList">
+        <item>ru</item>
+        <item>en</item>
+        <item>fr</item>
+    </string-array>
+
+    <string-array name="langAuto">
+        <item>auto</item>
+    </string-array>
+
+
 </resources>
