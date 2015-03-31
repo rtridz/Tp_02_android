@@ -22,9 +22,36 @@
 
         </activity>
         <activity
-            android:name=".lesson2" >
+            android:name=".Lesson2" >
 
         </activity>
+        <service android:name=".MyService" />
+
+        <receiver
+            android:name="com.demo.WiFiReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.demo.DataReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.demo.BluetoothReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+
     </application>
+
 
 </manifest>

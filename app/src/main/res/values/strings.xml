@@ -5,5 +5,7 @@
     <string name="hello_in_dev_branch">Hello in the DEV branch!</string>
     <string name="action_settings">Settings</string>
     <string name="button_title">This is Title on 2 act</string>
+    <string name="start">Start service</string>
+    <string name="stop">Stop service</string>
 
 </resources>

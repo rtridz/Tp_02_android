@@ -41,7 +41,7 @@ public class ButtonActivity extends ActionBarActivity {
 // отличие интента от бандла
 
             public void onClick(View v) {
-                Intent intent_lesson2 = new Intent(ButtonActivity.this, lesson2.class);
+                Intent intent_lesson2 = new Intent(ButtonActivity.this, Lesson2.class);
                 setResult(Activity.RESULT_OK,intent_lesson2);
 //                finish();
 //                startActivity(intent_lesson2);

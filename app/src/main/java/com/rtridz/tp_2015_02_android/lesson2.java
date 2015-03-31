@@ -10,7 +10,7 @@ import android.widget.Button;
 /**
  * Created by rtridz on 26.02.15.
  */
-public class lesson2 extends Activity {
+public class Lesson2 extends Activity {
 
 
 
